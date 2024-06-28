@@ -1,0 +1,397 @@
+/* General Body and Sidebar Styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top navigation styles */
+.topnav {
+  background-color: #333;
+  color: #fff;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.topnav-logo {
+  width: 150px;
+  height: auto;
+}
+
+.topnav ul {
+  list-style-type: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.topnav ul li {
+  margin: 0 10px;
+}
+
+.topnav ul li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 10px;
+  display: block;
+}
+
+.topnav ul li a:hover {
+  background-color: #575757;
+  border-radius: 4px;
+}
+
+.content {
+  margin-top: 60px; /* Adjust based on topnav height */
+  padding: 20px;
+  flex-grow: 1;
+}
+
+h2 {
+  text-align: center;
+}
+
+/* Dashboard Styles */
+.dashboard-section {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.dashboard-item {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  flex: 1;
+  min-width: 200px;
+}
+
+.dashboard-item h3 {
+  margin-top: 0;
+}
+
+.dashboard-item p {
+  font-size: 24px;
+  margin: 10px 0 0;
+}
+
+/* Add Asset Form Styles */
+.asset-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 20px auto;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 3px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.asset-form button {
+  grid-column: 1 / -1;
+  padding: 10px;
+  background-color: #f67126;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.asset-form button:hover {
+  background-color: #f67126;
+}
+
+/* Table Styles for genReport */
+.gen-report-content .table-container {
+  margin-left: 50px; /* Adjust this value to shift the table */
+  padding: 20px;
+}
+
+.gen-report-content table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.gen-report-content table, 
+.gen-report-content th, 
+.gen-report-content td {
+  border: 1px solid #ddd;
+}
+
+.gen-report-content th, 
+.gen-report-content td {
+  padding: 10px; /* Increased padding */
+  font-size: 14px; /* Increased font size */
+  text-align: left;
+}
+
+.gen-report-content th {
+  background: linear-gradient(to bottom, #ffc317, #f2f2f2);
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 2px solid #ddd;
+}
+
+.gen-report-content table thead th,
+.gen-report-content table thead td {
+  background: linear-gradient(to bottom, #ffc317, #f2f2f2); /* Gradient background for the first row */
+}
+
+.gen-report-content tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.gen-report-content tr:hover {
+  background-color: #f1f1f1;
+}
+
+.gen-report-content td {
+  border-bottom: 1px solid #ddd;
+}
+
+.gen-report-content th:first-child,
+.gen-report-content td:first-child {
+  border-left: none;
+}
+
+.gen-report-content th:last-child,
+.gen-report-content td:last-child {
+  border-right: none;
+}
+
+
+
+
+/* Profile Page Styles */
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.profile-item {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.profile-item h3 {
+  margin-top: 0;
+}
+
+.profile-item p {
+  font-size: 18px;
+  margin: 10px 0 0;
+}
+
+.profile-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.profile-actions button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #f67126;
+  color: white;
+}
+
+.profile-actions button:hover {
+  background-color: #f67126;
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 8px;
+}
+
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button[type="submit"] {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #f67126;
+  color: white;
+}
+
+button[type="submit"]:hover {
+  background-color: #f67126;
+}
+
+/* General Body and Sidebar Styles */
+.table-container table tbody tr:hover {
+    background-color: #f67126; /* Change background color on hover */
+}
+
+/* Style for edit and delete links */
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+/* styles.css */
+
+.pagination {
+    margin-top: 10px; /* Adjust margin as needed */
+}
+
+.pagination button {
+    padding: 8px 12px;
+    background-color: #f67126;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px; /* Adjust spacing between buttons */
+}
+
+.pagination button:hover {
+    background-color: #f67126;
+}
+
+.pagination button:disabled {
+    background-color: #dcdcdc;
+    color: #6c757d;
+    cursor: not-allowed;
+}
+
+.items-per-page {
+    margin-bottom: 10px; /* Adjust margin as needed */
+}
+ /* Style for Edit and Delete links */
+        .edit-link, .delete-link {
+            display: inline-block;
+            padding: 4px 8px;
+            margin-right: 5px;
+            text-decoration: none;
+            color: #007bff;
+            border: 1px solid #007bff;
+            border-radius: 4px;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+
+        .edit-link:hover, .delete-link:hover {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+
+        .delete-link {
+            color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .delete-link:hover {
+            background-color: #dc3545;
+            color: white;
+            border-color: #dc3545;
+        }
+

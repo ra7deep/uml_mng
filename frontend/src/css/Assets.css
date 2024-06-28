@@ -1,0 +1,106 @@
+/* Style for the Add Data and Add Field buttons */
+#addDataBtn,
+#addFieldBtn,
+#toggleColumnsBtn,
+#searchBtn {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px 10px 10px 0;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+#addDataBtn:hover,
+#addFieldBtn:hover,
+#toggleColumnsBtn:hover,
+#searchBtn:hover {
+  background-color: #45a049;
+}
+
+/* Modal styles */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
+  padding-top: 60px;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto; /* Centered on the page */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; /* Adjusted width for the modal content */
+  max-width: 600px; /* Maximum width */
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+}
+
+/* Form styles */
+#editForm label {
+  display: block;
+  margin-top: 10px;
+}
+
+#editForm input[type="text"],
+#editForm select {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin: 5px 0 20px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+#editForm button {
+  background-color: #4caf50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#editForm button:hover {
+  background-color: #45a049;
+}
+
+/* Search field styles */
+#searchInput {
+  width: 30%;
+  padding: 12px 20px;
+  margin: 10px 10px 10px 0;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+}

@@ -1,0 +1,73 @@
+/* Ensure the body has no margin or padding */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Ensure the top navigator spans the full width */
+.navbar {
+    width: 100%;
+    background-color: #333; /* Change this to your desired color */
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+/* Remove margin and padding from the container inside the navbar */
+.navbar .container {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+/* Style for the logo */
+.navbar .logo {
+    margin: 0;
+    padding: 0;
+}
+
+/* Style for the navigation links */
+.navbar .nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Style for each navigation link */
+.navbar .nav-links li {
+    margin: 0;
+    padding: 10px 15px;
+    color: white;
+}
+
+/* Add some spacing around the content sections */
+.container {
+    padding: 20px;
+}
+
+/* Example for the dashboard content */
+.dashboard {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    background-color: #f0f0f0; /* Adjust background color if needed */
+}
+
+/* Styles for the cards */
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 200px;
+}
