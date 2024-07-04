@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../css/Emplist.css';
-import TopNav from './TopNav'; // Import the TopNav component
+import TopNav from './AdmTopNav';
 
 const Emplist = () => {
     const [data, setData] = useState([]);
@@ -8,15 +8,15 @@ const Emplist = () => {
     const [itemsPerPage, setItemsPerPage] = useState(10);
     const [filter, setFilter] = useState('');
     const [selectedAsset, setSelectedAsset] = useState(null);
-    const [editFormData, setEditFormData] = useState(null); // State to hold the data of the item being edited
+    const [editFormData, setEditFormData] = useState(null);
+    const [addFormData, setAddFormData] = useState({}); // State to hold the data for the new employee
 
     useEffect(() => {
         fetchData();
     }, []);
 
     const fetchData = () => {
-        // Fetch data from server
-        fetch('http://localhost:5000/emplist')
+        fetch('http://localhost:5000/employee')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok ' + response.statusText);
@@ -40,11 +40,10 @@ const Emplist = () => {
     const changePage = (pageNumber) => setCurrentPage(pageNumber);
     const changeItemsPerPage = (event) => {
         setItemsPerPage(parseInt(event.target.value));
-        setCurrentPage(1); // Reset to first page when items per page changes
+        setCurrentPage(1);
     };
 
     const openModal = (id) => {
-        console.log('Fetching asset details for ID:', id); // Debug log
         fetch(`http://localhost:5000/get_asset/${id}`)
             .then(response => {
                 if (!response.ok) {
@@ -52,10 +51,7 @@ const Emplist = () => {
                 }
                 return response.json();
             })
-            .then(data => {
-                console.log('Asset details fetched:', data); // Debug log
-                setSelectedAsset(data);
-            })
+            .then(data => setSelectedAsset(data))
             .catch(error => console.error('Error fetching asset details:', error));
     };
 
@@ -76,7 +72,7 @@ const Emplist = () => {
         const formData = new FormData(e.target);
         const updatedItem = {};
         formData.forEach((value, key) => {
-            if (value) updatedItem[key] = value; // Only update fields with a non-empty value
+            if (value) updatedItem[key] = value;
         });
 
         try {
@@ -90,7 +86,7 @@ const Emplist = () => {
 
             if (response.ok) {
                 closeEditForm();
-                fetchData(); // Refresh data to show the updated item
+                fetchData();
             } else {
                 console.error('Failed to update item');
             }
@@ -100,6 +96,10 @@ const Emplist = () => {
     };
 
     const handleDelete = async (id) => {
+        if (!window.confirm('Are you sure you want to delete this item?')) {
+            return;
+        }
+
         try {
             const response = await fetch(`http://localhost:5000/delete_asset/${id}`, {
                 method: 'DELETE',
@@ -116,31 +116,72 @@ const Emplist = () => {
         }
     };
 
+    const openAddForm = () => {
+        setAddFormData({});
+        document.getElementById("addDataForm").style.display = "block";
+    };
+
+    const closeAddForm = () => {
+        setAddFormData({});
+        document.getElementById("addDataForm").style.display = "none";
+    };
+
+    const handleAddSubmit = async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const newItem = {};
+        formData.forEach((value, key) => {
+            if (value) newItem[key] = value;
+        });
+
+        try {
+            const response = await fetch('http://localhost:5000/add_asset', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newItem),
+            });
+
+            if (response.ok) {
+                closeAddForm();
+                fetchData();
+            } else {
+                console.error('Failed to add item');
+            }
+        } catch (error) {
+            console.error('Error adding item:', error);
+        }
+    };
+
     const totalPages = Math.ceil(filteredData.length / itemsPerPage);
 
     return (
         <div className="app">
-            <TopNav /> {/* Add the TopNav component here */}
+            <TopNav />
             <div className="content gen-report-content">
                 <div className="table-container">
-                    <div className="items-per-page">
-                        <label htmlFor="itemsPerPage">Items per page:</label>
-                        <select id="itemsPerPage" value={itemsPerPage} onChange={changeItemsPerPage}>
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                        </select>
-                    </div>
-                    <div className="filter-container">
-                        <label htmlFor="filterInput">Filter:</label>
-                        <input
-                            type="text"
-                            id="filterInput"
-                            value={filter}
-                            onChange={(e) => setFilter(e.target.value)}
-                            placeholder="Search"
-                        />
+                    <div className="actions-container">
+                        <button className="add-button" onClick={openAddForm}>Add New Employee</button>
+                        <div className="items-per-page">
+                            <label htmlFor="itemsPerPage">Items per page:</label>
+                            <select id="itemsPerPage" value={itemsPerPage} onChange={changeItemsPerPage}>
+                                <option value="10">10</option>
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                        </div>
+                        <div className="filter-container">
+                            <label htmlFor="filterInput">Filter:</label>
+                            <input
+                                type="text"
+                                id="filterInput"
+                                value={filter}
+                                onChange={(e) => setFilter(e.target.value)}
+                                placeholder="Search"
+                            />
+                        </div>
                     </div>
                     <table id="employeeTable">
                         <thead>
@@ -220,6 +261,31 @@ const Emplist = () => {
                                 )
                             ))}
                         <button type="submit">Save</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="addDataForm" className="modal">
+                <div className="modal-content">
+                    <span className="close" onClick={closeAddForm}>&times;</span>
+                    <h2>Add New Employee</h2>
+                    <form id="addForm" onSubmit={handleAddSubmit}>
+                        {data.length > 0 &&
+                            Object.keys(data[0]).map((key) => (
+                                key !== '_id' && (
+                                    <div key={key}>
+                                        <label htmlFor={key}>{key}:</label>
+                                        <input
+                                            type="text"
+                                            id={key}
+                                            name={key}
+                                            value={addFormData[key] || ''}
+                                            onChange={(e) => setAddFormData({ ...addFormData, [key]: e.target.value })}
+                                        />
+                                    </div>
+                                )
+                            ))}
+                        <button type="submit">Add</button>
                     </form>
                 </div>
             </div>

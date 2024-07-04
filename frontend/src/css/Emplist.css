@@ -1,3 +1,5 @@
+/* Emplist.css */
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -118,7 +120,6 @@ body {
     margin-right: 10px;
 }
 
-/* Additional styles for the search bar */
 #filterInput {
     width: 100%;
     padding: 12px 20px;
@@ -131,4 +132,24 @@ body {
 
 #filterInput::placeholder {
     color: #ccc;
+}
+
+/* Additional styles for the Add New Employee button */
+.add-button {
+    background-color: #4CAF50; /* Green background */
+    border: none; /* Remove border */
+    color: white; /* White text */
+    padding: 10px 20px; /* Some padding */
+    text-align: center; /* Center the text */
+    text-decoration: none; /* Remove underline */
+    display: inline-block; /* Get elements to sit side-by-side */
+    font-size: 16px; /* Increase font size */
+    margin: 10px 2px; /* Add some margin */
+    cursor: pointer; /* Pointer/hand icon on hover */
+    border-radius: 4px; /* Rounded corners */
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.add-button:hover {
+    background-color: #45a049; /* Darker green on hover */
 }

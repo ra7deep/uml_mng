@@ -1,0 +1,33 @@
+.profile {
+  max-width: 600px;
+  margin: 150px auto; /* Add some margin to shift content down */
+  padding: 20px;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+.profile img {
+  border-radius: 10px; /* Make the profile picture square */
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  margin-bottom: 20px;
+}
+
+.profile p {
+  font-size: 1.1em;
+  color: #333;
+  margin: 10px 0;
+}
+
+.profile strong {
+  font-weight: bold;
+  color: #555;
+}

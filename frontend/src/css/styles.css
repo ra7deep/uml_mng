@@ -10,7 +10,7 @@ body {
 
 /* Top navigation styles */
 .topnav {
-  background-color: #333;
+  background-color: #f67126;
   color: #fff;
   width: 100%;
   display: flex;
@@ -49,7 +49,7 @@ body {
 }
 
 .topnav ul li a:hover {
-  background-color: #575757;
+  background-color: #FFFFFF;
   border-radius: 4px;
 }
 

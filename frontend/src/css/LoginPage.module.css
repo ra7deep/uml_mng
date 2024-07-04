@@ -1,0 +1,74 @@
+.loginPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0; /* Light gray background */
+}
+
+.loginContainer {
+  background-color: white; /* White background for the login box */
+  padding: 20px; /* Spacing inside the box */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+  text-align: center;
+  width: 300px;
+}
+
+.loginLogo {
+  width: 100px; /* Width of the logo */
+  margin-bottom: 20px; /* Space below the logo */
+}
+
+.heading {
+  margin-bottom: 20px; /* Space below the heading */
+}
+
+.formGroup {
+  margin-bottom: 15px; /* Space below each form group */
+  text-align: left;
+}
+
+.label {
+  display: block;
+  margin-bottom: 5px; /* Space below the label */
+  font-weight: bold; /* Bold label text */
+}
+
+.input {
+  width: 100%;
+  padding: 10px; /* Padding inside the input fields */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 4px; /* Rounded corners */
+  box-sizing: border-box; /* Ensure padding is included in the total width/height */
+}
+
+.button {
+  width: 100%;
+  padding: 10px; /* Padding inside the button */
+  background-color: #ff7f00; /* Orange background */
+  color: white; /* White text */
+  border: none; /* No border */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  margin-top: 10px; /* Space above the button */
+}
+
+.buttonHover:hover {
+  background-color: #e67300; /* Darker orange on hover */
+}
+
+.link {
+  display: block;
+  margin-top: 10px; /* Space above the link */
+  color: #007bff; /* Blue text */
+  text-decoration: none; /* No underline */
+}
+
+.linkHover:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+
+.errorMessage {
+  color: red; /* Error message color */
+}

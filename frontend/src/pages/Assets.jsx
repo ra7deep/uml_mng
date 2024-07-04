@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import '../css/Assets.css';
-import TopNav from '../pages/TopNav'; // Assuming TopNav.jsx is correctly imported
+import TopNav from '../pages/AdmTopNav';
 
 function Assets() {
   const [data, setData] = useState([]);
@@ -8,7 +8,9 @@ function Assets() {
   const [itemsPerPage, setItemsPerPage] = useState(10);
   const [showFullTable, setShowFullTable] = useState(false);
   const [searchInput, setSearchInput] = useState('');
-  const [editFormData, setEditFormData] = useState(null); // State to hold the data of the item being edited
+  const [editFormData, setEditFormData] = useState(null);
+  const [editMessage, setEditMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() => {
     fetchData(); // Fetch data on component mount
@@ -88,7 +90,7 @@ function Assets() {
     });
   };
 
-  const searchTable = () => {
+  const searchTable = useCallback(() => {
     const filter = searchInput.toUpperCase();
     const table = document.getElementById("employeeTable");
     const tr = table.getElementsByTagName("tr");
@@ -105,9 +107,13 @@ function Assets() {
       }
       tr[i].style.display = display;
     }
-  };
+  }, [searchInput]);
 
   const handleDelete = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this item?')) {
+      return;
+    }
+
     try {
       const response = await fetch(`http://localhost:5000/delete_asset/${id}`, {
         method: 'DELETE',
@@ -151,8 +157,10 @@ function Assets() {
   };
 
   const openEditForm = (item) => {
-    setEditFormData(item);
-    document.getElementById("editDataForm").style.display = "block";
+    if (window.confirm('Are you sure you want to edit this item?')) {
+      setEditFormData(item);
+      document.getElementById("editDataForm").style.display = "block";
+    }
   };
 
   const closeEditForm = () => {
@@ -165,7 +173,7 @@ function Assets() {
     const formData = new FormData(e.target);
     const updatedItem = {};
     formData.forEach((value, key) => {
-      if (value) updatedItem[key] = value; // Only update fields with a non-empty value
+      updatedItem[key] = value; // Include all fields, even empty ones
     });
 
     try {
@@ -178,6 +186,8 @@ function Assets() {
       });
 
       if (response.ok) {
+        setSuccessMessage('Edited successfully');
+        console.log('Edit successful'); // Debugging log
         closeEditForm();
         fetchData(); // Refresh data to show the updated item
       } else {
@@ -185,8 +195,23 @@ function Assets() {
       }
     } catch (error) {
       console.error('Error updating item:', error);
+    } finally {
+      setTimeout(() => setSuccessMessage(''), 3000); // Clear the success message after 3 seconds
     }
   };
+
+  const filteredData = useMemo(() => {
+    const filter = searchInput.toUpperCase();
+    return data.filter(item => 
+      Object.values(item).some(value => 
+        String(value).toUpperCase().includes(filter)
+      )
+    );
+  }, [data, searchInput]);
+
+  useEffect(() => {
+    showCurrentPage();
+  }, [filteredData, currentPage, itemsPerPage]);
 
   return (
     <div className="report-page">
@@ -208,7 +233,6 @@ function Assets() {
             id="searchInput"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
-            onKeyUp={searchTable}
             placeholder="Search for names.."
           />
 
@@ -223,15 +247,7 @@ function Assets() {
               <span className="close" onClick={closeForm}>&times;</span>
               <h2>Add New Data</h2>
               <form id="dataForm">
-                {data.length > 0 &&
-                  Object.keys(data[0]).map((key) => (
-                    key !== '_id' && (
-                      <div key={key}>
-                        <label htmlFor={key}>{key}:</label>
-                        <input type="text" id={key} name={key} /><br />
-                      </div>
-                    )
-                  ))}
+                {/* Add your form fields here */}
                 <button type="submit">Submit</button>
               </form>
             </div>
@@ -259,6 +275,7 @@ function Assets() {
             <div className="modal-content">
               <span className="close" onClick={closeEditForm}>&times;</span>
               <h2>Edit Data</h2>
+              {editMessage && <p>{editMessage}</p>}
               <form id="editForm" onSubmit={handleEditSubmit}>
                 {editFormData &&
                   Object.keys(editFormData).map((key) => (
@@ -279,6 +296,8 @@ function Assets() {
             </div>
           </div>
 
+          {successMessage && <p className="success-message">{successMessage}</p>}
+
           <table id="employeeTable">
             <thead>
               <tr>
@@ -292,7 +311,7 @@ function Assets() {
               </tr>
             </thead>
             <tbody>
-              {data.map((item, rowIndex) => (
+              {filteredData.map((item, rowIndex) => (
                 <tr key={item._id}>
                   {Object.keys(item).map((key, colIndex) => (
                     key !== '_id' && (
